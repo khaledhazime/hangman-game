@@ -62,4 +62,4 @@ Inside the main menu you can choose to:
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - The project is based on the [Hangman Game](https://en.wikipedia.org/wiki/Hangman_(game))
-- The idea of the project was proposed by the professor [@danilo-perico](htps://github.com/danilo-perico) on CCP130 subject in the [University Center of FEI](https://www.fei.edu.br/)
+- The idea of the project was proposed by the professor [@danilo-perico](https://github.com/danilo-perico) on CCP130 subject in the [University Center of FEI](https://www.fei.edu.br/)
