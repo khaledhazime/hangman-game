@@ -40,10 +40,9 @@ Clone the repository and compile the project. (You can use the `git clone` comma
 It should be compiled in the same directory as the project and run in the terminal.
 
 ### Prerequisites
-
-    - [C](https://en.wikipedia.org/wiki/C_(programming_language))
-    - [Ncurses](https://en.wikipedia.org/wiki/Ncurses)
-    - [Git](https://git-scm.com/)
+- [C](https://en.wikipedia.org/wiki/C_(programming_language))
+- [Ncurses](https://en.wikipedia.org/wiki/Ncurses)
+- [Git](https://git-scm.com/)
 
 ## 🎈 Usage <a name="usage"></a>
 
