@@ -22,7 +22,7 @@ void dictionary(){
             break;
         case 2:
             clrscr();
-            draw_dictionary_add_word_menu(window_size, 1, "");
+            draw_dictionary_add_word_menu(window_size);
             dict_add_word(window_size);
             break;
         case 3:

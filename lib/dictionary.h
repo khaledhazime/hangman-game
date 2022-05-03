@@ -8,12 +8,14 @@ int create_dictionary(){
 }
 
 // Add a word to the dictionary
-void dict_add_word(){
+void dict_add_word(int window_size){
     char word[100];
-    gets(word);
-    clrscr();
     char def[100];
-    draw_dictionary_add_word_menu(100, 2, word);
+    center_text(window_size, "Enter the word to add:");
+    draw_space_line((window_size/2));
+    scanf("%s", word);
+    center_text(window_size, "Enter the definition of the word: ");
+    draw_space_line((window_size/2));
     scanf("%s", def);
     FILE *fp;
     fp = fopen("dictionary.txt", "a");

@@ -25,18 +25,9 @@ void draw_dictionary_menu(int menu_size){
     draw_space_line((menu_size/2));
 }
 
-void draw_dictionary_add_word_menu(int menu_size, int option, char *word){
+void draw_dictionary_add_word_menu(int menu_size){
     draw_menu_header(menu_size, "The Hangman Game", "Dictionary Menu");
     draw_line_cross(menu_size);
-
-    switch (option) {
-        case 1:
-            center_text(menu_size, "You chose to add a word to the dictionary");
-            center_text(menu_size, "Please, enter the word: ");
-        case 2:
-            center_text(menu_size, ("You added the word '%s' to the dictionary", word));
-            center_text(menu_size, "Please, enter the word definition: ");
-    }
-
+    center_text(menu_size, "You chose to add a word to the dictionary");
 }
 
