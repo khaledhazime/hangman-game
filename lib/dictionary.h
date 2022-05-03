@@ -21,4 +21,83 @@ void dict_add_word(int window_size){
     fp = fopen("dictionary.txt", "a");
     fprintf(fp, "%s : %s\n", word, def);
     fclose(fp);
+    center_text(window_size, "Word added to the dictionary successfully!");
+    draw_line_cross(window_size);
+    center_text(window_size, "1. Return to Dictionary Menu");
+    center_text(window_size, "2. Return to Main Menu      ");
+    draw_bottom_line(window_size);
+}
+
+// Remove a word from the dictionary
+void dict_remove_word(int window_size){
+    char word[100];
+    center_text(window_size, "Enter the word to remove:");
+    draw_space_line((window_size/2));
+    scanf("%s", word);
+    FILE *fp;
+    fp = fopen("dictionary.txt", "r");
+    char line[100];
+    char new_line[100];
+    int i = 0;
+    while(fgets(line, 100, fp) != NULL){
+        if(strstr(line, word) == NULL){
+            strcpy(new_line, line);
+            i++;
+        }
+    }
+    fclose(fp);
+    fp = fopen("dictionary.txt", "w");
+    for(i = 0; i < i; i++){
+        fprintf(fp, "%s", new_line);
+    }
+    fclose(fp);
+    center_text(window_size, "Word removed from the dictionary successfully!");
+    draw_line_cross(window_size);
+    center_text(window_size, "1. Return to Dictionary Menu");
+    center_text(window_size, "2. Return to Main Menu      ");
+    draw_bottom_line(window_size);
+}
+
+// Function to search a word in the dictionary
+void dict_search_word(int window_size){
+    char word[100];
+    center_text(window_size, "Enter the word to search:");
+    draw_space_line((window_size/2));
+    scanf("%s", word);
+    FILE *fp;
+    fp = fopen("dictionary.txt", "r");
+    char line[100];
+    // Separate the word and definition
+    char *word_sep;
+    char *def_sep;
+    int option;
+    while(fgets(line, 100, fp) != NULL){
+        word_sep = strtok(line, ":");
+        def_sep = strtok(NULL, ":");
+        if(strstr(word_sep, word) != NULL){
+            clrscr();
+            draw_dictionary_word_found_menu(window_size);
+            center_text(window_size, "Your word is:");
+            center_text(window_size, word_sep);
+            center_text(window_size, "The definition of this word is:");
+            center_text(window_size, def_sep);
+            draw_line_cross(window_size);
+            center_text(window_size, "1. Return to Dictionary Menu");
+            center_text(window_size, "2. Return to Main Menu      ");
+            draw_bottom_line(window_size);
+            fclose(fp);
+            return;
+        }
+    }
+    center_text(window_size, "Word not found in the dictionary!");
+    draw_line_cross(window_size);
+    center_text(window_size, "1. Return to Dictionary Menu");
+    center_text(window_size, "2. Return to Main Menu      ");
+    draw_bottom_line(window_size);
+    fclose(fp);
+    sleep(2);
+    return;
+
+
+
 }

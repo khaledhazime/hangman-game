@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
+#include <conio.h>
 
 #include "lib/utils.h"
 #include "lib/menu.h"
@@ -10,9 +11,10 @@
 #define clrscr() printf("\e[1;1H\e[2J")
 
 #define window_size 100
-
+void main_menu();
 void dictionary(){
     int option;
+    int menu_option;
     draw_dictionary_menu(window_size);
     while(1){
         scanf("%d", &option);
@@ -24,15 +26,47 @@ void dictionary(){
             clrscr();
             draw_dictionary_add_word_menu(window_size);
             dict_add_word(window_size);
+            scanf("%d", &menu_option);
+            if(menu_option == 1){
+                clrscr();
+                dictionary();
+            }
+            else{
+                clrscr();
+                main_menu();
+            }
             break;
         case 3:
-            // remove_word();
+            clrscr();
+            draw_dictionary_remove_word_menu(window_size);
+            dict_remove_word(window_size);
+            scanf("%d", &menu_option);
+            if(menu_option == 1){
+                clrscr();
+                dictionary();
+            }
+            else{
+                clrscr();
+                main_menu();
+            }
             break;
         case 4:
-            // search_word();
+            clrscr();
+            draw_dictionary_search_word_menu(window_size);
+            dict_search_word(window_size);
+            scanf("%d", &menu_option);
+            if(menu_option == 1){
+                clrscr();
+                dictionary();
+            }
+            else{
+                clrscr();
+                main_menu();
+            }
             break;
         case 5:
-            // main_menu();
+            clrscr();
+            main_menu();
             break;
         default:
             center_text(window_size, "Invalid number, please choose one of the above options");
@@ -41,10 +75,9 @@ void dictionary(){
         }
     }   
 }
-int main(){
-    clrscr();
-    int option = 0;
-    int dict = 0;
+
+void main_menu(){
+    int option;
     while(1){
         draw_main_menu(window_size);
         scanf("%d", &option);
@@ -58,7 +91,9 @@ int main(){
                 break;
 
         }
-        sleep(1000000);
     }
-    
+}
+int main(){
+    clrscr();
+    main_menu();
 }
