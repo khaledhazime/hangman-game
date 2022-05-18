@@ -76,10 +76,14 @@ void center_text(int length, char* text){;
     int space_length = (length - text_length)/2;
 
     draw_vertical_line(1);
+    
+    //Add spaces before the text
     for(int i=0; i<space_length; i++){
         printf("%s", SP);
     }
     printf("%s", text);
+
+    //If the text is odd, we need to add one more space after the text
     if(text_length%2 != 0){
         for(int i=0; i<space_length+1; i++){
             printf("%s", SP);
@@ -147,15 +151,15 @@ void draw_hangman(int size, int hangman_status){
     draw_space_line(hangman_size-1);
     
     //Conditional to print the left arm of the hangman depending on the number of lives
-    if(hangman_status >= 1 || hangman_status == 0) printf("/");
+    if(hangman_status > 1 || hangman_status == 0) printf("/");
     else draw_space_line(1);
 
     //Conditional to print the body of the hangman depending on the number of lives
-    if(hangman_status >= 2 || hangman_status == 0) printf("|");
+    if(hangman_status > 2 || hangman_status == 0) printf("|");
     else draw_space_line(1);
 
     //Conditional to print the right arm of the hangman depending on the number of lives
-    if(hangman_status >= 3 || hangman_status == 0) printf("\\");
+    if(hangman_status > 3 || hangman_status == 0) printf("\\");
     else draw_space_line(1);
     
     draw_space_line((size/2)-hangman_size+3);
@@ -169,13 +173,13 @@ void draw_hangman(int size, int hangman_status){
     draw_space_line(hangman_size-1);
 
     //Conditional to print the left leg of the hangman depending on the number of lives
-    if(hangman_status >= 4 || hangman_status == 0) printf("/");
+    if(hangman_status > 4 || hangman_status == 0) printf("/");
     else draw_space_line(1);
 
     draw_space_line(1);
 
     //Conditional to print the right leg of the hangman depending on the number of lives
-    if(hangman_status >= 5 || hangman_status == 0) printf("\\");
+    if(hangman_status > 5 || hangman_status == 0) printf("\\");
     else draw_space_line(1);
 
     draw_space_line((size/2)-hangman_size+3);
@@ -183,11 +187,6 @@ void draw_hangman(int size, int hangman_status){
     draw_vertical_line(1);
     new_line();
     draw_blank_line(size);
-    if(hangman_status == 0){
-        center_text(size, "You lost!");
-        new_line();
-    }
-    
 }
 
 //Function to draw a character box
@@ -204,6 +203,58 @@ void draw_char_box(char* text){
     printf("%s", RB);
 }
 
+//Function to draw multiple character boxes
+void draw_multiple_boxes(int window_size, char* text){
+    
+    int length = strlen(text)-1;
+
+    int space_size = (window_size - (length*3+length))/2;
+    
+    draw_vertical_line(1);
+    draw_space_line(space_size);
+    
+    for(int i=0; i<length; i++){
+        printf("%s", LT);
+        draw_horizontal_line(1);
+        printf("%s", RT);
+        draw_space_line(1);
+    }
+
+    draw_space_line(space_size);
+    draw_vertical_line(1);
+    new_line();
+
+    draw_vertical_line(1);
+    draw_space_line(space_size);
+
+    for(int i=0; i<length; i++){
+        draw_vertical_line(1);
+        printf("%c", text[i]);
+        draw_vertical_line(1);
+        draw_space_line(1);
+    }
+
+    draw_space_line(space_size);
+    draw_vertical_line(1);
+    new_line();
+
+    draw_vertical_line(1);
+    draw_space_line(space_size);
+
+    for(int i=0; i<length; i++){
+        printf("%s", LB);
+        draw_horizontal_line(1);
+        printf("%s", RB);
+        draw_space_line(1);
+    }
+    draw_space_line(space_size);
+    draw_vertical_line(1);
+    
+    new_line();
+    draw_blank_line(window_size);
+
+}
+
 void draw_menu_header(int size, char* title, char* subtitle){
     draw_top_line(size);
     center_text(size, title);
@@ -211,4 +262,12 @@ void draw_menu_header(int size, char* title, char* subtitle){
     center_text(size, subtitle);
     draw_blank_line(size);
     draw_hangman(size, 6);
+}
+
+void draw_header(int size, char* title, char* subtitle){
+    draw_top_line(size);
+    center_text(size, title);
+    draw_line_cross(size);
+    center_text(size, subtitle);
+    draw_blank_line(size);
 }
