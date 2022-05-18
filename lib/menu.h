@@ -47,3 +47,17 @@ void draw_dictionary_word_found_menu(int menu_size){
     draw_line_cross(menu_size);
     center_text(menu_size, "The word was found in the dictionary");
 }
+
+void draw_credits_menu(int menu_size){
+    draw_menu_header(menu_size, "The Hangman Game", "Credits Menu");
+    center_text(menu_size, "This game was created by:");
+    center_text(menu_size, "Khaled Hazime Guimaraes : github.com/khaledhazime");
+    center_text(menu_size, "Thanks for playing!");
+    draw_blank_line(menu_size);
+    draw_bottom_line(menu_size);
+    center_text(menu_size, "Press any key to return to the main menu");
+    draw_space_line((menu_size/2));
+    //Press any key to return
+    getch();
+    
+}
