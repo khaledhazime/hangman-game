@@ -1,4 +1,5 @@
 #define clrscr() printf("\e[1;1H\e[2J")
+
 // Function to create a dictionary file
 int create_dictionary(){
     FILE *fp;
@@ -97,7 +98,42 @@ void dict_search_word(int window_size){
     fclose(fp);
     sleep(2);
     return;
+}
 
+// Function to count the number of words in the dictionary
+int count_lines(char *filename){
+    FILE *fp;
+    fp = fopen(filename, "r");
+    int count = 0;
+    char line[100];
+    while(fgets(line, 100, fp) != NULL){
+        count++;
+    }
+    fclose(fp);
+    return count;
+}
 
+//Function to get random word and definition from dictionary
+void get_random_word_and_def(char *word, char *definition){
+    FILE *fp;
+    fp = fopen("dictionary.txt", "r");
+    char line[100];
+    char *chosen_word;
+    char *chosen_def;
+    srand(time(NULL));
+    int line_number = rand() % count_lines("dictionary.txt");
+    int i=0;
 
+    //Get random line
+    while(fgets(line, 100, fp) != NULL){
+        if(line_number == i){
+            chosen_word = strtok(line, ":");
+            chosen_def = strtok(NULL, ": ");
+            break;
+        }
+        i++;
+    }
+
+    strcpy(word, chosen_word);
+    strcpy(definition, chosen_def);
 }
