@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
-#include <conio.h>
+// #include <conio.h>
 
 #include "lib/utils.h"
 #include "lib/menu.h"
@@ -39,21 +39,8 @@ void dictionary(){
                 main_menu();
             }
             break;
+
         case 3:
-            clrscr();
-            draw_dictionary_remove_word_menu(window_size);
-            dict_remove_word(window_size);
-            scanf("%d", &menu_option);
-            if(menu_option == 1){
-                clrscr();
-                dictionary();
-            }
-            else{
-                clrscr();
-                main_menu();
-            }
-            break;
-        case 4:
             clrscr();
             draw_dictionary_search_word_menu(window_size);
             dict_search_word(window_size);
@@ -67,7 +54,7 @@ void dictionary(){
                 main_menu();
             }
             break;
-        case 5:
+        case 4:
             clrscr();
             main_menu();
             break;
@@ -81,6 +68,7 @@ void dictionary(){
 
 void main_menu(){
     int option;
+		int menu_option;
     while(1){
         draw_main_menu(window_size);
         scanf("%d", &option);
@@ -88,16 +76,17 @@ void main_menu(){
             case 1:
                 clrscr();
                 main_game_loop(window_size);
-                scanf(" %d", &option);
-                if(option == 1){
+                scanf(" %d", &menu_option);
+                if(menu_option == 1){
                     clrscr();
                     main_game_loop(window_size);
+																				
                 }
-                else if(option == 2){
+                else if(menu_option == 2){
                     clrscr();
                     main_menu();
                 }
-                else if(option == 3){
+                else if(menu_option == 3){
                     clrscr();
                     exit(0);
                 }
@@ -108,6 +97,7 @@ void main_menu(){
                 break;
             case 3:
                 clrscr();
+								draw_credits_menu(window_size);
                 draw_credits_menu(window_size);
                 clrscr();
                 break;

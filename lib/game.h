@@ -41,7 +41,6 @@ void draw_game_lose_menu(int window_size, int lifes, char* word, char* definitio
     center_text(window_size, "The definition of the word is: ");
     center_text(window_size, definition);
 
-    
     draw_line_cross(window_size);
     center_text(window_size, "1. Play again         ");
     center_text(window_size, "2. Return to Main Menu");
@@ -60,6 +59,7 @@ void main_game_loop(int window_size){
     char lifes_message[100];
     int correct = 0;
     int incorrect = 0;
+		int equal = 0;
 
     get_random_word_and_def(word, definition);
 
@@ -80,6 +80,11 @@ void main_game_loop(int window_size){
 
     while(lifes >= 0 && strcmp(word, guesses) != 0){
         clrscr();
+        if(lifes == 0){
+					clrscr();
+          draw_game_lose_menu(window_size, lifes, word, definition);
+					break;
+        }
 
         if(lifes>1) snprintf(lifes_message, sizeof(lifes_message), "You have %d guesses remaining", lifes);
         else if(lifes==1) snprintf(lifes_message, sizeof(lifes_message), "You have %d guess remaining", lifes);
@@ -100,6 +105,16 @@ void main_game_loop(int window_size){
         
         scanf(" %c", &guess);
 
+			
+				for(int i=0; i<strlen(wrong_guesses); i++){
+					// printf("Wrong guesses [%d] = %c\nLetter = %c\n", i, wrong_guesses[i], guess);
+					if(guess == wrong_guesses[i]){
+						equal = 1;
+						break;
+					}
+				}
+
+			
         for(int i = 0; i < strlen(word); i++){
             if(guess == word[i]){
                 guesses[i] = guess;
@@ -107,21 +122,17 @@ void main_game_loop(int window_size){
             }
         }
 
-        if(correct == 0){
+        if(correct == 0 && equal==0){
             wrong_guesses[incorrect] = guess;
             incorrect++;
             lifes--;
         }
         correct = 0;
-        
-        if(strcmp(word, guesses) == 0){
-            draw_game_win_menu(window_size, lifes, guesses, definition);       
-        }
+				equal = 0;
 
-        if(lifes == 0){
-            draw_game_lose_menu(window_size, lifes, word, definition);
+			if(strcmp(word, guesses) == 0){
+	            draw_game_win_menu(window_size, lifes, guesses, definition);       
         }
-        
     }
 }
 

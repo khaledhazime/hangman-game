@@ -28,35 +28,44 @@ void dict_add_word(int window_size){
     center_text(window_size, "2. Return to Main Menu      ");
     draw_bottom_line(window_size);
 }
-
-// Remove a word from the dictionary
-void dict_remove_word(int window_size){
+void dict_repeated_word(int window_size, char *word){
     char word[100];
-    center_text(window_size, "Enter the word to remove:");
+    center_text(window_size, "Enter the word to search:");
     draw_space_line((window_size/2));
     scanf("%s", word);
     FILE *fp;
     fp = fopen("dictionary.txt", "r");
     char line[100];
-    char new_line[100];
-    int i = 0;
+    // Separate the word and definition
+    char *word_sep;
+    char *def_sep;
+    int option;
     while(fgets(line, 100, fp) != NULL){
-        if(strstr(line, word) == NULL){
-            strcpy(new_line, line);
-            i++;
+        word_sep = strtok(line, ":");
+        def_sep = strtok(NULL, ":");
+        if(strstr(word_sep, word) != NULL){
+            clrscr();
+            draw_dictionary_word_found_menu(window_size);
+            center_text(window_size, "Your word is:");
+            center_text(window_size, word_sep);
+            center_text(window_size, "The definition of this word is:");
+            center_text(window_size, def_sep);
+            draw_line_cross(window_size);
+            center_text(window_size, "1. Return to Dictionary Menu");
+            center_text(window_size, "2. Return to Main Menu      ");
+            draw_bottom_line(window_size);
+            fclose(fp);
+            return;
         }
     }
-    fclose(fp);
-    fp = fopen("dictionary.txt", "w");
-    for(i = 0; i < i; i++){
-        fprintf(fp, "%s", new_line);
-    }
-    fclose(fp);
-    center_text(window_size, "Word removed from the dictionary successfully!");
+    center_text(window_size, "Word not found in the dictionary!");
     draw_line_cross(window_size);
     center_text(window_size, "1. Return to Dictionary Menu");
     center_text(window_size, "2. Return to Main Menu      ");
     draw_bottom_line(window_size);
+    fclose(fp);
+    sleep(2);
+    return;
 }
 
 // Function to search a word in the dictionary
