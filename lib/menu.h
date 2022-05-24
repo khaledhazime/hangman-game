@@ -13,7 +13,7 @@ void draw_main_menu(int menu_size){
 
 void draw_dictionary_menu(int menu_size){
     draw_menu_header(menu_size, "The Hangman Game", "Dictionary Menu");
-    center_text(menu_size, "1. Generate default dictionary        ");
+    center_text(menu_size, "1. Create a new dictionary            ");
     center_text(menu_size, "2. Add a word to the dictionary       ");
     center_text(menu_size, "3. Search for a word in the dictionary");
     center_text(menu_size, "4. Back to main menu                  ");
@@ -39,6 +39,16 @@ void draw_dictionary_word_found_menu(int menu_size){
     draw_menu_header(menu_size, "The Hangman Game", "Dictionary Menu");
     draw_line_cross(menu_size);
     center_text(menu_size, "The word was found in the dictionary");
+}
+
+void draw_dicitonary_repeated_word_menu(int menu_size){
+    draw_menu_header(menu_size, "The Hangman Game", "Dictionary Menu");
+    draw_line_cross(menu_size);
+    center_text(menu_size, "The word was already in the dictionary");
+    draw_line_cross(menu_size);
+    center_text(menu_size, "1. Return to Dictionary Menu");
+    center_text(menu_size, "2. Return to Main Menu      ");
+    draw_bottom_line(menu_size);
 }
 
 void draw_credits_menu(int menu_size){
